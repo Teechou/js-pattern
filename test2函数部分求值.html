@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var currying = function(fn){
+		    var args = [];
+		    return function(){
+		        //当参数为空时执行fn
+		        if(arguments.length === 0){
+		            return fn.apply(this, args);
+		        }else{ //有参数时，不计算，将参数存放至args
+		            [].push.apply(args, arguments);
+		            return arguments.callee;
+		        }
+		    }
+		}
+
+		var cost = (function(){
+		    var money = 0;
+
+		    return function(){
+		        for(var i = 0, len = arguments.length; i < len; i++){
+		            money += arguments[i];
+		        }
+		        return money;
+		    }
+		})()
+
+		var cost = currying(cost);
+		console.log(cost(100,300)); //第一天的花费，不计算真正的值
+		console.log(cost(200)); //第二天的花费，不计算真正的值
+		console.log(cost(300)); //第三天的花费，不计算真正的值
+		console.log(cost()) //输出600，输出前三天的值
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var throttle = function(fn, interval){
+		    var timer, firstTime = true;
+
+		    return function(){
+		        var args = arguments,
+		            me = this;
+
+		        //如果是第一次，则不需要延迟
+		        if(firstTime){
+		            fn.apply(me, args);
+		            return firstTime = false; 
+		        }
+		        
+		        //如果定时器还在，说明前一次的延迟执行还未完成
+		        if(timer){
+		            return false;
+		        }
+		        
+		        timer = setTimeout(function(){
+		            clearTimeout(timer);
+		            timer = null;
+		            fn.apply(me, args);
+		        }, interval)
+		    }
+		}
+
+		window.onresize = throttle(function(){
+		    console.log('Window onresize!!!');
+		}, 1000)
+
+		// window.onresize=function(){
+		// 	console.log('未结流');
+		// }
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var timeChunk = function(arr, fn, count, time){
+	    var obj, timer, len = arr.length;
+
+	    var start = function(){
+	    						// 取10跟数组长度中小的值
+	        for(var i = 0; i < Math.min(count || 1, arr.length); i++){
+	        	// 弹出i次数组元素
+	            var obj = arr.shift();
+	            fn(obj);
+	        }
+	    };
+
+	    return function(){
+	        timer = setInterval(function(){
+	            if(arr.length === 0){
+	                return clearInterval(timer);
+	                timer = null;
+	            }
+	            start();
+	        }, time)
+	    };
+	};
+	var arr = [];
+
+	for(var i = 0; i < 200; i++){
+	    arr.push(i)
+	};
+	var renderFriendList = timeChunk(arr, function(n){
+	    var div = document.createElement('div');
+	    div.innerHTML = n;
+	    document.body.appendChild(div);
+	}, 10, 200);
+
+	renderFriendList();
+</script>
+</body>
+</html>

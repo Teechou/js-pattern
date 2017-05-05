@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{background: pink;margin-bottom: 10px;height:10px;}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		// function addEle(tag)
+		// {
+		// 	for(var i=0;i<10;i++)
+		// 	{
+		// 		var oEle=document.createElement(tag);
+		// 		document.body.appendChild(oEle);
+		// 		oEle.style.display = 'none';
+		// 	}
+		// }
+		// addEle('div');
+		// 222
+		// function addEle(callback,tag)
+		// {
+		// 	for(var i=0;i<10;i++)
+		// 	{
+		// 		var oEle=document.createElement(tag);
+		// 		document.body.appendChild(oEle);
+		// 		callback(oEle);
+		// 	}
+		// }
+		// addEle(function(node){
+		// 	node.style.background ='#f00';
+		// 	node.style.display = 'none';
+		// },'div');
+		// 333
+		var isType = function(type){
+		        //函数作为返回值
+		    return function(obj){
+		        return Object.prototype.toString.call(obj) === '[object '+ type +']';
+		    }
+		}
+		var isArray = isType('Array');
+		var isString = isType('String');
+		var isNumber = isType('Number');
+
+		console.log(isArray([1, 6, 3]));
+		console.log(isString([1, 6, 3]));
+
+		// console.log(Object.prototype.toString.call('hello') === '[object String]');
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var addEvent = function(elem, type, handler){
+		    if(window.addEventListener){
+		        addEvent =  function(elem, type, handler){
+		            elem.addEventListener(type, handler, false);            
+		        }
+		    }
+		    if(window.attachEvent){
+		        addEvent =  function(elem, type, handler){
+		            elem.attachEvent('on' + type, handler);        
+		        }
+		    }
+
+		    addEvent(elem, type, handler);
+		};
+	</script>
+</body>
+</html>
